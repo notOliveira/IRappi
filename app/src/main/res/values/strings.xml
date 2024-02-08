@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">IRappi</string>
     <string name="api_key">f9f9634bcb934e49860e81558f60af91</string>
+
+    <string-array name="tags">
+        <item>Main course</item>
+        <item>Side dish</item>
+        <item>Dessert</item>
+        <item>Appetizer</item>
+        <item>Salad</item>
+        <item>Bread</item>
+        <item>Breakfast</item>
+        <item>Soup</item>
+        <item>Beverage</item>
+        <item>Sauce</item>
+        <item>Marinade</item>
+        <item>Finger-food</item>
+        <item>Snack</item>
+        <item>Drink</item>
+    </string-array>
 </resources>
