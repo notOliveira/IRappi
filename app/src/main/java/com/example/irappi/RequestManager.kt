@@ -17,12 +17,15 @@ class RequestManager(var context: Context) {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getRandomRecipes(listener: RandomRecipesListener, tags: List<String>) {
+    fun getRandomRecipes(listener: RandomRecipesListener,
+                         tags: List<String>
+    ) {
         val callRandomRecipes = retrofit.create(
             CallRandomRecipes::class.java
         )
         val call = callRandomRecipes.callRandomRecipe(
-            context.getString(R.string.api_key), "10", tags)
+            context.getString(R.string.api_key), "10", tags
+        )
         call.enqueue(object : Callback<RandomRecipes?> {
             override fun onResponse(
                 call: Call<RandomRecipes?>,
