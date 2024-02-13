@@ -26,9 +26,19 @@ class RandomRecipeAdapter(var context: Context, var list: List<Recipe>) :
         val likes = list[position].aggregateLikes
         holder.textView_title.text = list[position].title
         holder.textView_title.isSelected = true
-        holder.textView_likes.text = String.format("%s curtidas", likes)
-        holder.textView_servings.text = String.format("%s pessoas", servings)
-        holder.textView_time.text = String.format("%s minutos", minutes)
+        when (likes) {
+            0 -> holder.textView_likes.text = String.format("No likes")
+            1 -> holder.textView_likes.text = String.format("1 like")
+            else -> holder.textView_likes.text = String.format("%s likes", likes)
+        }
+        when (servings) {
+            1 -> holder.textView_servings.text = String.format("1 serving")
+            else -> holder.textView_servings.text = String.format("%s servings", servings)
+        }
+        when (minutes) {
+            1 -> holder.textView_time.text = String.format("1 minute")
+            else -> holder.textView_time.text = String.format("%s minutes", minutes)
+        }
         Picasso.get().load(list[position].image).into(holder.imageView_food)
     }
 
