@@ -1,3 +1,3 @@
-# Third part
+# Fourth part
 
-- Adding search bar to search specific recipes
+- Adding a activity to show the selected recipe details

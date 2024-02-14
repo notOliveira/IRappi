@@ -9,10 +9,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.irappi.R
+import com.example.irappi.listeners.RecipeClickListener
 import com.example.irappi.models.Recipe
 import com.squareup.picasso.Picasso
 
-class RandomRecipeAdapter(var context: Context, var list: List<Recipe>) :
+class RandomRecipeAdapter(var context: Context, var list: List<Recipe>, var listener: RecipeClickListener ) :
     RecyclerView.Adapter<RandomRecipeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RandomRecipeViewHolder {
         return RandomRecipeViewHolder(
@@ -40,6 +41,10 @@ class RandomRecipeAdapter(var context: Context, var list: List<Recipe>) :
             else -> holder.textView_time.text = String.format("%s minutes", minutes)
         }
         Picasso.get().load(list[position].image).into(holder.imageView_food)
+
+        holder.random_list_container.setOnClickListener(View.OnClickListener {
+            listener.onRecipeClicked(list.get(holder.adapterPosition).id.toString())
+        })
     }
 
     override fun getItemCount(): Int {
