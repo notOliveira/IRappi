@@ -2,11 +2,12 @@ package com.example.irappi;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,10 +17,12 @@ import com.example.irappi.listeners.RecipeDetailsListener;
 import com.example.irappi.models.RecipeDetailsResponse;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     int id;
-    TextView textView_meal_name, textView_meal_source, textView_meal_summary;
+    TextView textView_meal_name, textView_meal_source, textView_meal_summary, textView_meal_id;
     ImageView imageView_meal_image;
     RecyclerView recyler_meal_ingredients;
     RequestManager manager;
@@ -33,7 +36,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         findViews();
 
-        id = Integer.parseInt(getIntent().getStringExtra("id"));
+
+        this.id = Integer.parseInt(Objects.requireNonNull(getIntent().getStringExtra("id")));
 
         manager = new RequestManager(this);
         manager.getRecipeDetails(recipeDetailsListener, id);
@@ -43,23 +47,28 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     private void findViews() {
+        textView_meal_id = findViewById(R.id.textView_meal_id);
         textView_meal_name = findViewById(R.id.textView_meal_name);
         textView_meal_source = findViewById(R.id.textView_meal_source);
         textView_meal_summary = findViewById(R.id.textView_meal_summary);
         imageView_meal_image = findViewById(R.id.imageView_meal_image);
         recyler_meal_ingredients = findViewById(R.id.recyler_meal_ingredients);
     }
+
     private final RecipeDetailsListener recipeDetailsListener = new RecipeDetailsListener() {
         @Override
         public void didFetch(@Nullable RecipeDetailsResponse response, @Nullable String message) {
             dialog.dismiss();
+            textView_meal_id.setText(String.format("ID: #" + response.getId()));
             textView_meal_name.setText(response.getTitle());
-            textView_meal_source.setText(response.getSourceName());
-            textView_meal_summary.setText(response.getSummary());
+            textView_meal_source.setText(String.format("Source" + response.getSourceName()));
+            textView_meal_summary.setText(Html.fromHtml(response.getSummary()));
             Picasso.get().load(response.getImage()).into(imageView_meal_image);
 
+            int numberOfColumns = 2;
             recyler_meal_ingredients.setHasFixedSize(true);
-            recyler_meal_ingredients.setLayoutManager(new LinearLayoutManager(RecipeDetailsActivity.this, LinearLayoutManager.VERTICAL, false));
+            GridLayoutManager layoutManager = new GridLayoutManager(RecipeDetailsActivity.this, numberOfColumns);
+            recyler_meal_ingredients.setLayoutManager(layoutManager);
             ingredientsAdaptor = new IngredientsAdaptor(RecipeDetailsActivity.this, response.getExtendedIngredients());
             recyler_meal_ingredients.setAdapter(ingredientsAdaptor);
         }

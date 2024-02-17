@@ -32,15 +32,24 @@
                 android:padding="8dp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/textView_meal_source"
-                android:text="Source"
+                android:id="@+id/textView_meal_id"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="italic"
                 android:textSize="14sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
+            <TextView
+            android:id="@+id/textView_meal_source"
+            android:text="Source"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/imageView_meal_image"
                 android:layout_width="match_parent"
@@ -55,7 +64,9 @@
                 android:textColor="@color/white"
                 android:padding="8dp"
                 android:textSize="14sp"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:gravity="fill_horizontal"
+                android:textAlignment="gravity"/>
             <TextView
                 android:text="Ingredients"
                 android:layout_width="match_parent"
@@ -67,7 +78,7 @@
                 android:textStyle="bold"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyler_meal_ingredients"
-                android:layout_margin="8dp"
+                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
