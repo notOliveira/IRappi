@@ -1,7 +1,6 @@
 package com.example.irappi
 
 import android.content.Context
-import com.example.irappi.R
 import com.example.irappi.listeners.RandomRecipesListener
 import com.example.irappi.listeners.RecipeDetailsListener
 import com.example.irappi.models.RandomRecipes
@@ -79,8 +78,9 @@ class RequestManager(var context: Context) {
     private interface CallRecipeDetails {
         @GET("recipes/{id}/information")
         fun callRecipeDetails(
-            @Query("apiKey") apiKey: String?,
-            @Path("id") id: Int
+            @Path("id") id: Int,
+            @Query("apiKey") apiKey: String?
+
         ): Call<RecipeDetailsResponse>
     }
 
