@@ -11,7 +11,8 @@
         android:title="Recipe Details"
         android:titleTextColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_orange"/>
     
     <ScrollView
         android:layout_width="match_parent"
@@ -63,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:padding="8dp"
-                android:textSize="14sp"
+                android:textSize="17sp"
                 android:layout_margin="8dp"
                 android:gravity="fill_horizontal"
                 android:textAlignment="gravity"/>

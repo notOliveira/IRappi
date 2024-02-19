@@ -29,6 +29,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ProgressDialog dialog;
     IngredientsAdaptor ingredientsAdaptor;
 
+    private String removeHtml(String html) {
+        return html.replaceAll("<[^>]*>", "");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             textView_meal_id.setText(String.format("ID: #" + response.getId()));
             textView_meal_name.setText(response.getTitle());
             textView_meal_source.setText(String.format("Source" + response.getSourceName()));
-            textView_meal_summary.setText(Html.fromHtml(response.getSummary()));
+            String plain_text = removeHtml(String.valueOf(Html.fromHtml(response.getSummary())));
+            textView_meal_summary.setText(plain_text);
             Picasso.get().load(response.getImage()).into(imageView_meal_image);
 
             int numberOfColumns = 2;
@@ -77,5 +81,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         public void didError(@Nullable String message) {
             Toast.makeText(RecipeDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
         }
+
+
     };
 }
